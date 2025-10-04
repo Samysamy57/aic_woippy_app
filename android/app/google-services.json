@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "467610928095",
+    "project_id": "aic-woippy-app-8815b",
+    "storage_bucket": "aic-woippy-app-8815b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467610928095:android:edfba629700f1a4973ba6a",
+        "android_client_info": {
+          "package_name": "com.aicwoippy.aic_woippy_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvX5FbvdLc29-5loKXNE9YGo2VWr0QUZ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
