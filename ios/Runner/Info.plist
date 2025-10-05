@@ -45,5 +45,15 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- DÉBUT DU BLOC À AJOUTER -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Notre application a besoin d'accéder à votre galerie pour vous permettre de téléverser vos pièces justificatives (carte étudiant, etc.).</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Notre application a besoin d'accéder à votre appareil photo pour vous permettre de prendre en photo vos pièces justificatives.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Cette permission est requise pour sauvegarder des images dans votre galerie.</string>
+	<!-- FIN DU BLOC À AJOUTER -->
+
 </dict>
 </plist>
