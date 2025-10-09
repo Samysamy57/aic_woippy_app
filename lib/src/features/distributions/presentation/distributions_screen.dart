@@ -19,10 +19,10 @@ class DistributionsScreen extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 12),
+          padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
           child: Text(
             title,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
           ),
         ),
         asyncData.when(
@@ -34,7 +34,7 @@ class DistributionsScreen extends ConsumerWidget {
               );
             }
             return SizedBox(
-              height: 170,
+              height: 210,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: distributions.length,

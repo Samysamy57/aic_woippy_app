@@ -10,70 +10,76 @@ import 'widgets/confirmation_popup.dart';
 import 'widgets/view_qr_code_button.dart';
 import 'widgets/collapsible_chip_list.dart';
 import 'widgets/volunteer_confirmation_popup.dart';
+// NOUVEL AJOUT : Importer le widget pour le fond
+import 'package:aic_woippy_app/src/shared/widgets/background_container.dart';
 
-// --- CHANGEMENT 1 : On reçoit un 'distributionId' (un texte) au lieu de l'objet complet ---
+
 class DistributionDetailScreen extends ConsumerWidget {
   final String distributionId;
   const DistributionDetailScreen({super.key, required this.distributionId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // --- CHANGEMENT 2 : On écoute les données en temps réel grâce au nouveau provider ---
     final distributionAsyncValue = ref.watch(distributionDetailProvider(distributionId));
 
     return distributionAsyncValue.when(
       data: (distribution) {
-        // 'distribution' ici est maintenant un objet qui se mettra à jour automatiquement
         final userData = ref.watch(userDataProvider).value;
         final userRegistrations = ref.watch(userRegistrationsProvider).value ?? [];
         final isRegistered = userRegistrations.any((doc) => doc.id.startsWith(distribution.id));
 
-        return Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
+
+        return BackgroundContainer(
+          imagePath: 'assets/images/background_main.png', // <-- AJOUTEZ CETTE LIGNE
+          child: Scaffold(
+            // MODIFICATION : Rendre le Scaffold transparent
             backgroundColor: Colors.transparent,
-            elevation: 0,
-            leading: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundColor: Colors.black.withOpacity(0.5),
-                child: BackButton(color: Colors.white),
+            extendBodyBehindAppBar: true,
+            appBar: AppBar(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              leading: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: CircleAvatar(
+                  backgroundColor: Colors.black.withOpacity(0.5),
+                  child: BackButton(color: Colors.white),
+                ),
               ),
             ),
-          ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildHeaderImage(distribution),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(distribution.title, style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 16),
-                      _buildInfoCard(context, icon: Icons.calendar_today, title: "Date et Heure", subtitle: DateFormat('EEEE d MMMM yyyy à HH:mm', 'fr_FR').format(distribution.date.toDate())),
-                      const SizedBox(height: 8),
-                      _buildInfoCard(context, icon: Icons.location_on, title: "Lieu", subtitle: distribution.location),
-                    ],
+            body: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildHeaderImage(distribution),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(distribution.title, style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
+                        const SizedBox(height: 16),
+                        _buildInfoCard(context, icon: Icons.calendar_today, title: "Date et Heure", subtitle: DateFormat('EEEE d MMMM yyyy à HH:mm', 'fr_FR').format(distribution.date.toDate())),
+                        const SizedBox(height: 8),
+                        _buildInfoCard(context, icon: Icons.location_on, title: "Lieu", subtitle: distribution.location),
+                      ],
+                    ),
                   ),
-                ),
-                _buildSectionTitle(context, 'Aperçu du panier', Icons.shopping_basket_outlined),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: CollapsibleChipList(items: distribution.foodItems),
-                ),
-                _buildSectionTitle(context, 'Instructions importantes', Icons.info_outline),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Text(distribution.instructions),
-                ),
-                const SizedBox(height: 150), // Espace pour les boutons en bas
-              ],
+                  _buildSectionTitle(context, 'Aperçu du panier', Icons.shopping_basket_outlined),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: CollapsibleChipList(items: distribution.foodItems),
+                  ),
+                  _buildSectionTitle(context, 'Instructions importantes', Icons.info_outline),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text(distribution.instructions),
+                  ),
+                  const SizedBox(height: 150),
+                ],
+              ),
             ),
+            bottomNavigationBar: _buildBottomButtons(context, ref, userData?.dossierStatus, isRegistered, distribution),
           ),
-          bottomNavigationBar: _buildBottomButtons(context, ref, userData?.dossierStatus, isRegistered, distribution),
         );
       },
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
@@ -81,7 +87,7 @@ class DistributionDetailScreen extends ConsumerWidget {
     );
   }
 
-  // --- CHANGEMENT 3 : Les petites fonctions utilisent maintenant l'objet 'distribution' qu'on leur passe ---
+  // Le reste du fichier reste INCHANGÉ...
   Widget _buildSectionTitle(BuildContext context, String title, IconData icon) {
     return Padding(
       padding: const EdgeInsets.only(top: 24.0, bottom: 8.0, left: 16, right: 16),
@@ -140,7 +146,6 @@ class DistributionDetailScreen extends ConsumerWidget {
   }
 }
 
-// Gère l'affichage des boutons en bas en fonction du statut du dossier
 Widget _buildBottomButtons(BuildContext context, WidgetRef ref, String? dossierStatus, bool isRegistered, DistributionModel distribution) {
   if (dossierStatus != 'approved') {
     String message;
@@ -182,15 +187,11 @@ Widget _buildBottomButtons(BuildContext context, WidgetRef ref, String? dossierS
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // --- Section 1: Gestion du Panier ---
           if (isRegistered)
-          // --- DÉBUT DE LA CORRECTION ---
-          // On enveloppe le bandeau dans un ClipRRect pour obtenir les coins arrondis
             ClipRRect(
-              borderRadius: BorderRadius.circular(12.0), // Même rayon que les autres boutons
+              borderRadius: BorderRadius.circular(12.0),
               child: ViewQrCodeButton(distribution: distribution),
             )
-          // --- FIN DE LA CORRECTION ---
           else if (!isVolunteer)
             ElevatedButton(
               onPressed: () {
@@ -206,7 +207,6 @@ Widget _buildBottomButtons(BuildContext context, WidgetRef ref, String? dossierS
           if ((isRegistered || !isVolunteer) && (isVolunteer || volunteerSlotsAvailable || !volunteerSlotsAvailable && !isVolunteer))
             const SizedBox(height: 8),
 
-          // --- Section 2: Gestion du Bénévolat ---
           if (isVolunteer)
             OutlinedButton.icon(
               icon: const Icon(Icons.cancel_outlined),

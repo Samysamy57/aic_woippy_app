@@ -97,7 +97,7 @@ class _DistributionCardState extends State<DistributionCard>
         ));
       },
       child: Container(
-        width: 260,
+        width: 350,
         margin: const EdgeInsets.only(left: 16),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -117,47 +117,50 @@ class _DistributionCardState extends State<DistributionCard>
               children: [
                 ClipRRect(
                   borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
-                  child: imageWidget,
-                ),
-                if (isLowStock && _animationController != null)
-                  Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    child: AnimatedBuilder(
-                      animation: _animationController!,
-                      builder: (context, child) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                          color: _colorAnimation?.value ?? Colors.greenAccent.withOpacity(0.91),
-                          child: Text(
-                            "Plus que ${widget.distribution.availableBaskets} paniers !",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                  // --- MODIFICATION ICI ---
+                  // On adapte la hauteur de l'image pour la nouvelle taille de carte
+                  child: SizedBox(
+                    height: 140, // Augmenté de 100 à 140
+                    width: double.infinity,
+                    child: imageWidget,
                   ),
+                ),
                 if (isSoldOut)
                   Positioned(
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
+                    bottom: 8,
+                    left: 8,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                      color: Colors.red.withOpacity(0.91),
-                      child: const Text(
-                        "Épuisé",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: Colors.red.withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Text("Épuisé", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12)),
+                    ),
+                  )
+                else if (isLowStock)
+                  Positioned(
+                    bottom: 8,
+                    right: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFFDECE2).withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.shopping_basket_outlined, color: Colors.green, size: 18),
+                          const SizedBox(width: 6),
+                          Text(
+                            "${widget.distribution.availableBaskets}",
+                            style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 14),
+                          ),
+                        ],
                       ),
                     ),
                   ),
+                // --- FIN DE LA NOUVELLE LOGIQUE ---
               ],
             ),
             Padding(

@@ -32,43 +32,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // --- 1. NOUVELLE COULEUR PRIMAIRE ---
-    // Un vert forêt, plus profond et élégant.
-    const primaryColor = Color(0xFF62AC45);
+    const primaryColor = Color(0xFF33803B); // Le nouveau vert
     final baseTextTheme = GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme);
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AIC Woippy',
-      // --- DÉBUT DE LA DÉFINITION DU THÈME ---
       theme: ThemeData(
         primaryColor: primaryColor,
         scaffoldBackgroundColor: const Color(0xFFF7F9FC),
 
-        // --- 2. TAILLE DES TEXTES AJUSTÉE ---
         textTheme: baseTextTheme.copyWith(
-          // Titres très grands (ex: "Bienvenue")
           headlineMedium: baseTextTheme.headlineMedium?.copyWith(fontSize: 28),
-          // Titres de section (ex: "Prochaines distributions")
           headlineSmall: baseTextTheme.headlineSmall?.copyWith(fontSize: 22),
-          // Titres de cartes ou d'éléments importants
           titleLarge: baseTextTheme.titleLarge?.copyWith(fontSize: 18),
         ),
 
-        // --- 3. HAUTEUR DE L'APPBAR RÉDUITE ---
+        // --- DÉBUT DE LA CORRECTION ---
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
-          elevation: 0.5,
+          elevation: 0, // 1. On retire l'ombre en mettant l'élévation à 0
           centerTitle: true,
-          toolbarHeight: 40, // Hauteur personnalisée (défaut: 56)
+          toolbarHeight: 50,
           titleTextStyle: GoogleFonts.poppins(
-            fontSize: 10, // Taille du titre de l'AppBar légèrement réduite
+            fontSize: 17,
             fontWeight: FontWeight.w600,
           ),
         ),
 
-        // Le reste du thème utilise automatiquement la nouvelle couleur
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             backgroundColor: primaryColor,
@@ -99,7 +91,6 @@ class MyApp extends StatelessWidget {
           labelStyle: TextStyle(color: Colors.grey[600]),
         ),
       ),
-      // --- FIN DE LA DÉFINITION DU THÈME ---
       home: const SplashScreen(),
     );
   }

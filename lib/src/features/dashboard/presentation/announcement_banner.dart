@@ -128,11 +128,13 @@ class _AnnouncementBannerState extends ConsumerState<AnnouncementBanner> {
           ),
         );
       },
-      loading: () => const Center(child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: LinearProgressIndicator(),
-      )),
-      error: (e, s) => const SizedBox.shrink(), // Ne rien afficher en cas d'erreur
+      loading: () => const SizedBox(
+        height: 88, // Hauteur approximative du bandeau pour éviter les sauts d'affichage
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
+      error: (e, s) => const SizedBox.shrink(),
     );
   }
 }

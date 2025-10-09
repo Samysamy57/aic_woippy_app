@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:aic_woippy_app/src/core/models/user_model.dart';
 import 'package:aic_woippy_app/src/features/profile/application/dossier_controller.dart';
 import 'package:aic_woippy_app/src/features/profile/application/profile_provider.dart';
 import 'package:aic_woippy_app/src/features/dashboard/presentation/home_screen.dart';
+import 'package:aic_woippy_app/src/shared/widgets/background_container.dart';
+
 
 class DossierScreen extends ConsumerWidget {
   const DossierScreen({super.key});
@@ -18,18 +21,24 @@ class DossierScreen extends ConsumerWidget {
     final userAsync = ref.watch(userDataProvider);
     final canPop = userAsync.value?.dossierStatus != 'not_submitted';
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Mon Dossier Étudiant'),
-        automaticallyImplyLeading: canPop,
-      ),
-      body: userAsync.when(
-        data: (user) {
-          if (user == null) return const Center(child: Text('Utilisateur introuvable.'));
-          return DossierForm(user: user);
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, s) => Center(child: Text('Erreur de chargement: $e')),
+
+    return BackgroundContainer(
+      imagePath: 'assets/images/background_main.png', // <-- AJOUTEZ CETTE LIGNE
+      child: Scaffold(
+
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: const Text('Mon Dossier Étudiant'),
+          automaticallyImplyLeading: canPop,
+        ),
+        body: userAsync.when(
+          data: (user) {
+            if (user == null) return const Center(child: Text('Utilisateur introuvable.'));
+            return DossierForm(user: user);
+          },
+          loading: () => const Center(child: CircularProgressIndicator()),
+          error: (e, s) => Center(child: Text('Erreur de chargement: $e')),
+        ),
       ),
     );
   }
@@ -82,14 +91,11 @@ class _DossierFormState extends ConsumerState<DossierForm> {
     _accommodationType = widget.user.accommodationType;
     _hasDisability = widget.user.hasDisability;
 
-    // --- CORRECTION DE LA LOGIQUE DE TYPE ---
     if (widget.user.dossierStatus == 'rejected' && widget.user.rejectionData?['fields'] != null) {
       final fieldsData = widget.user.rejectionData!['fields'];
       if (fieldsData is List) {
-        // Si c'est déjà une liste, on la convertit.
         _rejectedFields = List<String>.from(fieldsData.map((e) => e.toString()));
       } else if (fieldsData is String) {
-        // Si c'est une seule chaîne, on la met dans une liste.
         _rejectedFields = [fieldsData];
       }
     }
@@ -105,32 +111,70 @@ class _DossierFormState extends ConsumerState<DossierForm> {
     super.dispose();
   }
 
-  Future<void> _pickImage(ImageSource source, String fieldName, String documentName) async {
+  Future<void> _pickFile(ImageSource source, String fieldName, String documentName) async {
     final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: source, imageQuality: 80);
-    if (pickedFile != null) {
-      final file = File(pickedFile.path);
+    File? file;
+
+    if (source == ImageSource.gallery) {
+      final pickedFile = await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
+      if (pickedFile != null) {
+        file = File(pickedFile.path);
+      }
+    } else if (source == ImageSource.camera) {
+      final pickedFile = await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
+      if (pickedFile != null) {
+        file = File(pickedFile.path);
+      }
+    } else {
+      final result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf', 'jpg', 'jpeg', 'png'],
+      );
+      if (result != null && result.files.single.path != null) {
+        file = File(result.files.single.path!);
+      }
+    }
+
+    if (file != null) {
       ref.read(dossierControllerProvider.notifier).uploadFileAndUpdateField(file, fieldName, documentName);
     }
   }
 
-  void _showImagePicker(BuildContext context, String fieldName, String documentName) {
-    showModalBottomSheet(context: context, builder: (ctx) => SafeArea(
-      child: Wrap(
-        children: <Widget>[
-          ListTile(
-            leading: const Icon(Icons.photo_library),
-            title: const Text('Galerie'),
-            onTap: () { _pickImage(ImageSource.gallery, fieldName, documentName); Navigator.of(ctx).pop(); },
-          ),
-          ListTile(
-            leading: const Icon(Icons.photo_camera),
-            title: const Text('Appareil photo'),
-            onTap: () { _pickImage(ImageSource.camera, fieldName, documentName); Navigator.of(ctx).pop(); },
-          ),
-        ],
+  void _showFilePicker(BuildContext context, String fieldName, String documentName) {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => SafeArea(
+        child: Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Galerie de photos'),
+              onTap: () {
+                Navigator.of(ctx).pop();
+                _pickFile(ImageSource.gallery, fieldName, documentName);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_camera),
+              title: const Text('Prendre une photo'),
+              onTap: () {
+                Navigator.of(ctx).pop();
+                _pickFile(ImageSource.camera, fieldName, documentName);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.folder_open),
+              title: const Text('Choisir un fichier (PDF, image...)'),
+              onTap: () {
+                Navigator.of(ctx).pop();
+                // On passe une source bidon pour déclencher le cas 'else'
+                _pickFile(ImageSource.gallery, fieldName, documentName);
+              },
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   Widget _buildRejectionBanner() {
@@ -175,7 +219,7 @@ class _DossierFormState extends ConsumerState<DossierForm> {
         const SizedBox(height: 8),
         OutlinedButton.icon(
           style: isRejected ? OutlinedButton.styleFrom(foregroundColor: Colors.red, side: const BorderSide(color: Colors.red)) : null,
-          onPressed: isUploading ? null : () => _showImagePicker(context, fieldName, documentName),
+          onPressed: isUploading ? null : () => _showFilePicker(context, fieldName, documentName),
           icon: isUploading
               ? const SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2))
               : Icon(url != null ? Icons.check_circle : Icons.upload_file, color: url != null ? Colors.green : (isRejected ? Colors.red : null)),
@@ -216,7 +260,6 @@ class _DossierFormState extends ConsumerState<DossierForm> {
     }
     final messenger = ScaffoldMessenger.of(context);
 
-    // En soumettant, on supprime les anciennes raisons de rejet
     final dataToSave = {
       'dossierStatus': 'pending',
       'rejectionData': FieldValue.delete(),

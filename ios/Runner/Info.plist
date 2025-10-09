@@ -54,6 +54,11 @@
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Cette permission est requise pour sauvegarder des images dans votre galerie.</string>
 	<!-- FIN DU BLOC À AJOUTER -->
+    <key>UIBackgroundModes</key>
+        <array>
+            <string>fetch</string>
+            <string>remote-notification</string>
+        </array>
 
 </dict>
 </plist>

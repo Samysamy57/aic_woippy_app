@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:aic_woippy_app/src/features/auth/application/auth_controller.dart';
-import 'package:aic_woippy_app/src/features/auth/presentation/login_screen.dart';
+import 'package:aic_woippy_app/src/features/auth/presentation/animated_auth_screen.dart';
+import 'package:aic_woippy_app/src/features/auth/presentation/phone_verification_screen.dart'; // <-- AJOUTER L'IMPORT
 import 'package:aic_woippy_app/src/features/dashboard/presentation/home_screen.dart';
 import 'package:aic_woippy_app/src/features/profile/application/profile_provider.dart';
 import 'package:aic_woippy_app/src/features/profile/presentation/dossier_screen.dart';
@@ -18,39 +19,46 @@ class AuthWrapper extends ConsumerWidget {
     return authState.when(
       data: (user) {
         if (user == null) {
-          return const LoginScreen();
+          // 1. Pas d'utilisateur -> Écran de connexion
+          return const AnimatedAuthScreen();
         } else {
+          // Utilisateur connecté, on vérifie ses informations
           final userData = ref.watch(userDataProvider);
           return userData.when(
             data: (userModel) {
               if (userModel == null) {
-                // Ce cas peut se produire brièvement pendant la création du document.
                 return const Scaffold(body: Center(child: CircularProgressIndicator()));
               }
 
+              // --- NOUVELLE LOGIQUE DE VÉRIFICATION ---
+
+              // 2. Le téléphone n'est pas encore vérifié -> Écran de vérification
+              if (!userModel.phoneVerified) {
+                return PhoneVerificationScreen(phoneNumber: userModel.phone);
+              }
+
+              // 3. Le téléphone est vérifié, on regarde le statut du dossier
               final status = userModel.dossierStatus;
               if (status == 'not_submitted' || status == 'rejected') {
                 return const DossierScreen();
               } else {
+                // 4. Tout est en ordre -> Page d'accueil
                 return const HomeScreen();
               }
             },
             loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-            // *** C'EST ICI QU'ON AJOUTE LA GESTION D'ERREUR ***
             error: (e, s) {
-              // Si on a une erreur de permission, c'est probablement que l'utilisateur a été supprimé.
-              // On le déconnecte de force pour nettoyer l'état de l'app.
+              // Gestion d'erreur...
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 ref.read(authControllerProvider.notifier).signOut();
               });
-              // On affiche l'écran de connexion en attendant la déconnexion.
-              return const LoginScreen();
+              return const AnimatedAuthScreen();
             },
           );
         }
       },
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (error, stack) => Scaffold(body: Center(child: Text('Erreur d\'authentification: $error'))),
+      error: (error, stack) => Scaffold(body: Center(child: Text("Erreur: $error"))),
     );
   }
 }

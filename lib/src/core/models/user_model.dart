@@ -8,6 +8,7 @@ class UserModel {
   final String lastName;
   final String email;
   final String phone;
+  final bool phoneVerified; // <-- NOUVELLE LIGNE
   final String role;
   final String dossierStatus;
   final String paymentStatus;
@@ -32,6 +33,7 @@ class UserModel {
     required this.lastName,
     required this.email,
     required this.phone,
+    this.phoneVerified = false,
     this.role = 'student',
     this.dossierStatus = 'not_submitted',
     this.paymentStatus = 'unpaid',
@@ -57,6 +59,7 @@ class UserModel {
       lastName: data['lastName'] ?? '',
       email: data['email'] ?? '',
       phone: data['phone'] ?? '',
+      phoneVerified: data['phoneVerified'] ?? false,
       role: data['role'] ?? 'student',
       dossierStatus: data['dossierStatus'] ?? 'not_submitted',
       paymentStatus: data['paymentStatus'] ?? 'unpaid',
