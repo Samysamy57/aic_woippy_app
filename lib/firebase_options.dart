@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'aic-woippy-app-8815b.firebasestorage.app',
     iosBundleId: 'com.aicwoippy.aicWoippyApp',
   );
+
 }
