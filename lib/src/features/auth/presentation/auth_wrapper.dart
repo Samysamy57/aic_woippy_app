@@ -19,8 +19,10 @@ class AuthWrapper extends ConsumerWidget {
     return authState.when(
       data: (user) {
         if (user == null) {
+          // 1. Pas d'utilisateur -> Écran de connexion
           return const AnimatedAuthScreen();
         } else {
+          // Utilisateur connecté, on vérifie ses informations
           final userData = ref.watch(userDataProvider);
           return userData.when(
             data: (userModel) {
@@ -28,24 +30,25 @@ class AuthWrapper extends ConsumerWidget {
                 return const Scaffold(body: Center(child: CircularProgressIndicator()));
               }
 
-              // --- MODIFICATION DE TEST ICI ---
-              // On force la condition à 'true' pour sauter l'écran de vérification.
-              // C'était : if (!userModel.phoneVerified) {
-              if (false) { // <-- MODIFICATION TEMPORAIRE
-                // ------------------------------------
-
+              // --- CORRECTION À APPLIQUER ICI ---
+              // On restaure la logique originale qui vérifie si le téléphone de l'utilisateur est validé.
+              if (!userModel.phoneVerified) {
                 return PhoneVerificationScreen(phoneNumber: userModel.phone);
               }
+              // --- FIN DE LA CORRECTION ---
 
+              // Le téléphone est vérifié, on regarde le statut du dossier
               final status = userModel.dossierStatus;
               if (status == 'not_submitted' || status == 'rejected') {
                 return const DossierScreen();
               } else {
+                // Tout est en ordre -> Page d'accueil
                 return const HomeScreen();
               }
             },
             loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
             error: (e, s) {
+              // Gestion d'erreur...
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 ref.read(authControllerProvider.notifier).signOut();
               });
