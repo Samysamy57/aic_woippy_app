@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,15 +25,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -64,6 +55,35 @@ class DefaultFirebaseOptions {
     projectId: 'aic-woippy-app-8815b',
     storageBucket: 'aic-woippy-app-8815b.firebasestorage.app',
     iosBundleId: 'com.aicwoippy.aicWoippyApp',
+  );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyCxZ7C1X_iv3f94D7vVIpchmiW_VjSYPXA',
+    appId: '1:467610928095:web:8121fc4f8341cfb273ba6a',
+    messagingSenderId: '467610928095',
+    projectId: 'aic-woippy-app-8815b',
+    authDomain: 'aic-woippy-app-8815b.firebaseapp.com',
+    storageBucket: 'aic-woippy-app-8815b.firebasestorage.app',
+    measurementId: 'G-JSQRTF7DPG',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyAJIEH4IehuSkJf79LyAhw3q7XDYfijoo4',
+    appId: '1:467610928095:ios:ae163769cf02235073ba6a',
+    messagingSenderId: '467610928095',
+    projectId: 'aic-woippy-app-8815b',
+    storageBucket: 'aic-woippy-app-8815b.firebasestorage.app',
+    iosBundleId: 'com.aicwoippy.aicWoippyApp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyCxZ7C1X_iv3f94D7vVIpchmiW_VjSYPXA',
+    appId: '1:467610928095:web:7735122335dc7c6b73ba6a',
+    messagingSenderId: '467610928095',
+    projectId: 'aic-woippy-app-8815b',
+    authDomain: 'aic-woippy-app-8815b.firebaseapp.com',
+    storageBucket: 'aic-woippy-app-8815b.firebasestorage.app',
+    measurementId: 'G-RGE1G50W4H',
   );
 
 }
