@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="14159a29-0609-4184-983b-60359401b13d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.firebaserc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.metadata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/kotlin/com/aicwoippy/aic_woippy_app/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/aicwoippy/aic_woippy_app/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable-v21/launch_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/drawable/launch_background.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values-night/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/.package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/axios/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/android/node_modules/axios/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/call-bind-apply-helpers/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/call-bind-apply-helpers/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/call-bind-apply-helpers/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/deepmerge/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/deepmerge/.eslintcache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/delayed-stream/.npmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/dunder-proto/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/dunder-proto/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/dunder-proto/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-define-property/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-define-property/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-define-property/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-errors/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-errors/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-object-atoms/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-object-atoms/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-set-tostringtag/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/es-set-tostringtag/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/function-bind/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/function-bind/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/function-bind/.github/SECURITY.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/function-bind/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/function-bind/test/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/get-intrinsic/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/get-intrinsic/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/get-intrinsic/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/get-proto/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/get-proto/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/get-proto/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/gopd/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/gopd/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/has-symbols/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/has-symbols/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/has-symbols/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/has-tostringtag/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/has-tostringtag/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/has-tostringtag/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/hasown/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/hasown/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/hasown/.nycrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/math-intrinsics/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/math-intrinsics/.github/FUNDING.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/proxy-from-env/.eslintrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/node_modules/proxy-from-env/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/firebase.json" beforeDir="false" afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Base.lproj/Main.storyboard" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/core/models/user_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/core/models/user_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/announcements/presentation/announcements_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/announcements/presentation/announcements_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/application/auth_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/application/auth_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/data/auth_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/data/auth_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/animated_auth_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/animated_auth_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/auth_wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/auth_wrapper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/phone_verification_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/phone_verification_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/auth/presentation/reset_by_phone_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/auth/presentation/reset_by_phone_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/dashboard/data/dashboard_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/dashboard/data/dashboard_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/dashboard/presentation/announcement_banner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/dashboard/presentation/announcement_banner.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/dashboard/presentation/dashboard_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/dashboard/presentation/dashboard_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/dashboard/presentation/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/dashboard/presentation/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/application/distributions_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/application/distributions_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/data/distributions_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/data/distributions_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/models/distribution_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/models/distribution_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/distribution_detail_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/distribution_detail_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/distributions_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/distributions_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/qr_code_popup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/qr_code_popup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/collapsible_chip_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/collapsible_chip_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/confirmation_popup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/confirmation_popup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/distribution_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/distribution_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/dossier_action_banner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/dossier_action_banner.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/dossier_status_footer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/dossier_status_footer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/upcoming_registration_banner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/upcoming_registration_banner.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/view_qr_code_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/view_qr_code_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/volunteer_confirmation_popup.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/distributions/presentation/widgets/volunteer_confirmation_popup.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/application/dossier_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/application/dossier_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/application/profile_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/application/profile_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/data/profile_repository.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/data/profile_repository.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/presentation/dossier_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/presentation/dossier_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/profile/presentation/profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/profile/presentation/profile_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/features/splash/presentation/splash_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/features/splash/presentation/splash_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/shared/widgets/background_container.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/shared/widgets/background_container.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/src/shared/widgets/fading_edge_scroll_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/src/shared/widgets/fading_edge_scroll_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/linux/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/flutter/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/runner/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/linux/runner/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/runner/main.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/runner/main.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/runner/my_application.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/runner/my_application.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/runner/my_application.h" beforeDir="false" afterPath="$PROJECT_DIR$/linux/runner/my_application.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/widget_test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/test/widget_test.dart" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="34NVkPUBAlsSSfO7QvNFCVuvJmK" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="14159a29-0609-4184-983b-60359401b13d" name="Changes" comment="" />
+      <created>1761054163273</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1761054163273</updated>
+    </task>
+    <servers />
+  </component>
+</project>
