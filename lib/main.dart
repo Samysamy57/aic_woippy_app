@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'firebase_options.dart';
 import 'package:aic_woippy_app/src/features/splash/presentation/splash_screen.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
+import 'package:flutter/foundation.dart'; // <-- AJOUTER CET IMPORT
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,10 +16,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  // --- MODIFICATION DE LA LOGIQUE APP CHECK ---
+  // On utilise le "provider" de débogage uniquement en mode debug.
+  // En mode release (TestFlight, App Store), il utilisera App Attest.
+  final appleProvider = kDebugMode ? AppleProvider.debug : AppleProvider.appAttest;
+
   await FirebaseAppCheck.instance.activate(
-    androidProvider: AndroidProvider.debug,
-    appleProvider: AppleProvider.debug,
+    androidProvider: AndroidProvider.debug, // Gardez debug pour Android pour l'instant
+    appleProvider: appleProvider,
   );
+  // --- FIN DE LA MODIFICATION ---
 
   runApp(
     const ProviderScope(
