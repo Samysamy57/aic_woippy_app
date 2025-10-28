@@ -1,5 +1,6 @@
 // lib/src/features/auth/presentation/phone_verification_screen.dart
 
+import 'dart:async'; // NOUVEL IMPORT NÉCESSAIRE
 import 'dart:ui';
 import 'package:aic_woippy_app/src/shared/widgets/fading_edge_scroll_view.dart';
 import 'package:flutter/material.dart';
@@ -18,44 +19,77 @@ class PhoneVerificationScreen extends ConsumerStatefulWidget {
 }
 
 class _PhoneVerificationScreenState extends ConsumerState<PhoneVerificationScreen> {
-  // ... (toute la logique interne reste la même)
   String? _verificationId;
   final _codeController = TextEditingController();
-  bool _isLoading = true;
+  bool _isLoading = true; // On commence en mode chargement
+
   @override
-  void initState() { super.initState(); WidgetsBinding.instance.addPostFrameCallback((_) => _sendVerificationCode()); }
+  void initState() {
+    super.initState();
+    // --- MODIFICATION DE LA LOGIQUE D'APPEL ---
+    // On appelle la fonction d'envoi après la construction de la première frame,
+    // avec un petit délai pour garantir que tout est prêt.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Un petit délai de sécurité
+      Timer(const Duration(milliseconds: 500), () {
+        if (mounted) {
+          _sendVerificationCode();
+        }
+      });
+    });
+  }
+
   void _sendVerificationCode() {
     if (!mounted) return;
     setState(() => _isLoading = true);
+
     ref.read(authControllerProvider.notifier).sendPhoneVerificationCode(
       phoneNumber: widget.phoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {
         if (!mounted) return;
         setState(() => _isLoading = true);
-        await ref.read(authControllerProvider.notifier).linkCredential(credential);
-        _navigateToNextScreen();
+        try {
+          await ref.read(authControllerProvider.notifier).linkCredential(credential);
+          _navigateToNextScreen();
+        } catch (e) {
+          if (mounted) {
+            setState(() => _isLoading = false);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("La vérification automatique a échoué."), backgroundColor: Colors.red));
+          }
+        }
       },
       verificationFailed: (FirebaseAuthException e) {
         if (!mounted) return;
         setState(() => _isLoading = false);
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Erreur : ${e.message}"), backgroundColor: Colors.red));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Erreur d'envoi du code : ${e.message}"), backgroundColor: Colors.red));
       },
       codeSent: (String verificationId, int? resendToken) {
         if (!mounted) return;
-        setState(() { _verificationId = verificationId; _isLoading = false; });
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Code envoyé !"), backgroundColor: Colors.green));
+        setState(() {
+          _verificationId = verificationId;
+          _isLoading = false;
+        });
       },
       codeAutoRetrievalTimeout: (String verificationId) {
-        if (!mounted) return;
-        setState(() { _verificationId = verificationId; });
+        if (!mounted && _verificationId == null) {
+          setState(() {
+            _verificationId = verificationId;
+          });
+        }
       },
     );
   }
+
   void _submitCode() async {
     if (_verificationId == null || _codeController.text.length != 6) return;
     if (!mounted) return;
     setState(() => _isLoading = true);
     try {
-      await ref.read(authControllerProvider.notifier).verifySmsCodeAndLinkAccount(verificationId: _verificationId!, smsCode: _codeController.text);
+      await ref.read(authControllerProvider.notifier).verifySmsCodeAndLinkAccount(
+          verificationId: _verificationId!,
+          smsCode: _codeController.text
+      );
       _navigateToNextScreen();
     } catch (e) {
       if (!mounted) return;
@@ -63,17 +97,18 @@ class _PhoneVerificationScreenState extends ConsumerState<PhoneVerificationScree
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Le code est incorrect. Veuillez réessayer."), backgroundColor: Colors.red));
     }
   }
+
   void _navigateToNextScreen() {
     if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) => const DossierScreen()), (route) => false);
   }
+
   Widget _buildBackground() {
     return Stack(children: [ Container(decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/background_auth.png'), fit: BoxFit.cover))), BackdropFilter(filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), child: Container(color: Colors.black.withOpacity(0.3)))]);
   }
 
   @override
   Widget build(BuildContext context) {
-    // ... (la logique de build reste la même, mais avec la nouvelle structure)
     final textTheme = Theme.of(context).textTheme;
     final defaultPinTheme = PinTheme(width: 50, height: 55, textStyle: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600), decoration: BoxDecoration(color: Colors.white, border: Border.all(color: Colors.grey.shade300), borderRadius: BorderRadius.circular(8)));
 
@@ -106,15 +141,18 @@ class _PhoneVerificationScreenState extends ConsumerState<PhoneVerificationScree
                         color: Color(0xB3FFFFFF),
                         borderRadius: BorderRadius.vertical(top: Radius.circular(25)),
                       ),
-                      child: FadingEdgeScrollView( // <-- ENVELOPPEMENT ICI
+                      child: FadingEdgeScrollView(
                         child: ListView(
                           padding: const EdgeInsets.symmetric(horizontal: 24.0).copyWith(top: 10.0),
                           children: [
                             Text("Vérification", textAlign: TextAlign.center, style: textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.bold)),
                             const SizedBox(height: 8),
-                            Text("Saisissez le code à 6 chiffres envoyé au\n${widget.phoneNumber}", textAlign: TextAlign.center, style: textTheme.titleMedium?.copyWith(color: Colors.grey[600])),
+                            Text("Un code va être envoyé au\n${widget.phoneNumber}", textAlign: TextAlign.center, style: textTheme.titleMedium?.copyWith(color: Colors.grey[600])),
                             const SizedBox(height: 32),
-                            Pinput(
+                            // Pendant le chargement initial, on affiche un indicateur à la place du Pinput
+                            _isLoading && _verificationId == null
+                                ? const Center(child: CircularProgressIndicator())
+                                : Pinput(
                               length: 6,
                               controller: _codeController,
                               onCompleted: (pin) => _submitCode(),
@@ -124,8 +162,14 @@ class _PhoneVerificationScreenState extends ConsumerState<PhoneVerificationScree
                               validator: (s) => s?.length == 6 ? null : 'Le code doit faire 6 chiffres',
                             ),
                             const SizedBox(height: 24),
-                            _isLoading ? const Center(child: CircularProgressIndicator()) : ElevatedButton(onPressed: _submitCode, child: const Text("Vérifier et continuer")),
-                            TextButton(onPressed: _isLoading ? null : _sendVerificationCode, child: const Text("Renvoyer le code")),
+                            ElevatedButton(
+                                onPressed: _isLoading || _verificationId == null ? null : _submitCode,
+                                child: _isLoading ? const CircularProgressIndicator(color: Colors.white) : const Text("Vérifier et continuer")
+                            ),
+                            TextButton(
+                                onPressed: _isLoading ? null : _sendVerificationCode,
+                                child: const Text("Renvoyer le code")
+                            ),
                           ],
                         ),
                       ),
